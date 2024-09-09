@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotplace Details</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    {% load static %}
+    <link href="{% static 'css/place.css' %}" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="d-flex justify-content-end mb-3">
+            <a href="{% url 'hot-place' %}" class="btn btn-primary">
+                <i class="fas fa-search-location"></i> Explore Nearby
+            </a>
+        </div>
+        <!-- 여기까지가 버튼 코드 -->
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h3>{{ festival.festival_name }}</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5>Location:</h5>
+                        <p>{{ festival.location }}</p>
+
+                        <h5>Distance from You:</h5>
+                        <p>{{ festival.distance }} km</p>
+
+                        <h5>Tags:</h5>
+                        <p>{{ festival.tag }}</p>
+
+                        <h5>Related Blogs:</h5>
+                        <ul>
+                            {% for blog in festival.blog %}
+                                <li><a href="{{ blog.url }}" target="_blank">{{ blog.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <div id="map">
+                            {{ img_path|safe }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    {% load static %}
+    <script type="text/javascript" src="{% static 'js/hotplace.js' %}"></script> <!-- JS 파일 포함 -->
+    
+</body>
+</html>

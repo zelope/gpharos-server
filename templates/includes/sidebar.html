@@ -1,0 +1,17 @@
+<!-- Custom CSS -->
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+
+<!-- templates/includes/sidebar.html -->
+<nav id="sidebar" class="col-12 col-lg-2 d-block d-lg-block">
+    <div class="position-sticky">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link active" href="{% url 'map-view' %}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'hot-place' %}">Hot Place</a>
+            </li>
+        </ul>
+    </div>
+</nav>

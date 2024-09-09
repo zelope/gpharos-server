@@ -1,0 +1,33 @@
+/* 사이드바 스타일 */
+#sidebar {
+    height: 100vh;
+    background-color: #2b3e50; /* 어두운 블루톤 배경 */
+    color: #ffffff;
+    padding-top: 20px;
+}
+#sidebar .nav-link {
+    color: #ffffff;
+    margin-bottom: 15px;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+#sidebar .nav-link:hover {
+    background-color: #3e5675; /* 밝은 블루톤으로 변경 */
+}
+
+@media (max-width: 992px) {
+    #sidebar {
+        height: 20vh; /* 높이를 50%로 줄임 */
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #sidebar .nav-link {
+        padding: 8px 8px; /* 링크의 패딩도 조정 */
+        text-align: center; /* 텍스트를 중앙 정렬 */
+        margin-bottom: -3px;
+        margin: 4px;
+    }
+}

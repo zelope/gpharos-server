@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gpharos</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/hot.css' %}">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- 사이드바 -->
+            {% include 'includes/sidebar.html' %}
+
+            <!-- 메인 콘텐츠 -->
+            <main class="col-md-11 col-lg-10 px-md-6">
+                {% if user.name %}
+    <h1 class="h2 text-lg-start text-center">Hotplace</h1>
+    <p class="lead text-lg-start text-center">
+        현재 {{user.name}}님의 위치는 {{user.location}} 입니다
+    </p>
+    <script>
+        var userExists = true;
+    </script>
+{% else %}
+    <h1 class="h2 text-lg-start text-center">Hotplace - 로딩 중...</h1>
+    <script>
+        var userExists = false;
+    </script>
+{% endif %}
+                {% if culture_walk %}
+                <p>문화시설 및 전통시장</p>
+                <div class="image-wrapper">
+                    <div id="slider1" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            {% for hot_place in culture_walk %}
+                                {% if forloop.counter0|divisibleby:3 %}
+                                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                        <div class="image-box">
+                                {% endif %}
+                                            {% if hot_place.id %}
+                                            <a href="{% url 'detail_result' hot_place.id %}" class="image-item">
+                                                        <div>
+                                                            {{hot_place.img_path|safe}}
+                                                        </div>
+                                                    <div class="overlay">
+                                                        <span class="text">{{ hot_place.hot_name }}</span>
+                                                        <span class="arrow">></span>
+                                                    </div>
+                                            </a>
+                                            {% else %}
+                                            <div class="image-item">
+                                                <img src="{% static hot_place.img_path %}" class="d-block w-100">
+                                                <div class="overlay">
+                                                    <span class="text">{{ hot_place.hot_name }}</span>
+                                                    <span class="arrow">></span>
+                                                </div>
+                                            </div>
+                                            {% endif %}
+                                {% if forloop.counter|divisibleby:3 or forloop.last %}
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <!-- 슬라이더 컨트롤 추가 -->
+                        <button class="carousel-control-prev" type="button" data-bs-target="#slider1" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#slider1" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+                {% endif %}
+                {% if leisure %}
+                <p>산책 코스</p>
+                <div class="image-wrapper">
+                    <div id="slider2" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            {% for hot_place in leisure %}
+                                {% if forloop.counter0|divisibleby:3 %}
+                                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                        <div class="image-box">
+                                {% endif %}
+                                            {% if hot_place.id %}
+                                            <a href="{% url 'detail_result' hot_place.id %}" class="image-item">
+                                                        <div>
+                                                            {{hot_place.img_path|safe}}
+                                                        </div>
+                                                    <div class="overlay">
+                                                        <span class="text">{{ hot_place.hot_name }}</span>
+                                                        <span class="arrow">></span>
+                                                    </div>
+                                            </a>
+                                            {% else %}
+                                            <div class="image-item">
+                                                <img src="{% static hot_place.img_path %}" class="d-block w-100">
+                                                <div class="overlay">
+                                                    <span class="text">{{ hot_place.hot_name }}</span>
+                                                    <span class="arrow">></span>
+                                                </div>
+                                            </div>
+                                            {% endif %}
+                                {% if forloop.counter|divisibleby:3 or forloop.last %}
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <!-- 슬라이더 컨트롤 추가 -->
+                        <button class="carousel-control-prev" type="button" data-bs-target="#slider2" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#slider2" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+                {% endif %}
+            </main>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS 및 Custom JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    {% load static %}
+    <script type="text/javascript" src="{% static 'js/hotplace.js' %}"></script> <!-- JS 파일 포함 -->
+    
+</body>
+</html>
